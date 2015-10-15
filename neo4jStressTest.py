@@ -29,3 +29,4 @@ except Exception as detail:
 #print results
 #print datetime.now() - startTime
 print  str(sys.argv[2])+' , '+str(outConnectTo)+' , '+str(time.time() - startTime)
+
