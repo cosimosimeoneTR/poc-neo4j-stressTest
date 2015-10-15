@@ -2,13 +2,18 @@
 
 import json
 from py2neo import Graph, authenticate, Node
-import time,random,sys
+import time,random,sys,string
 from datetime import datetime
 
 randCompany = random.randint(1, 1000)
-
-#startTime = datetime.now()
-startTime = time.time()
+query={}
+query[0] = "MATCH (Company{companyName:'Cmp_#'})-[x:PRODUCES]->(Drug)<-[r:RELATED_TO]-(Trial)-[z:RELATED_TO]->(anotherDrug) RETURN Company,Drug,Trial,anotherDrug "
+query[1] = "MATCH (Drug{drugName:'Drg_#'})-[x:PRODUCES]->(Drug)<-[r:RELATED_TO]-(Trial)-[z:RELATED_TO]->(anotherDrug) RETURN Company,Drug,Trial,anotherDrug "
+query[2] = "MATCH (Company{attr1:'asqwdasdasda'})-[x:PRODUCES]->(Drug)<-[r:RELATED_TO]-(Trial)-[z:RELATED_TO]->(anotherDrug) RETURN Company,Drug,Trial,anotherDrug "
+query[3] = "MATCH (Company{attr9:'asqwdasdasda'})-[x:PRODUCES]->(Drug)<-[r:RELATED_TO]-(Trial)-[z:RELATED_TO]->(anotherDrug) RETURN Company,Drug,Trial,anotherDrug "
+rndQuery=random.randint(0, 3)
+rndQueryVal=random.randint(0, 1000)
+queryToRun = query[rndQuery].replace('#',str(rndQueryVal))
 
 connectTo = sys.argv[1]
 outConnectTo = connectTo
@@ -16,18 +21,14 @@ outConnectTo = connectTo
 if connectTo == 'localhost':
    outConnectTo = connectTo+'-'+str(sys.argv[3])
 
-#print str(sys.argv[1])+":7474"
+
+startTime = time.time()
 authenticate(str(connectTo)+":7474", "neo4j", "neo4j123")
 graph = Graph()
 
-
-#results = graph.cypher.execute("MATCH (Company{companyName:'Cmp_1'})-[x:PRODUCES]->(Drug)<-[r:RELATED_TO]-(Trial)-[z:RELATED_TO]->(anotherDrug) RETURN Company,Drug,Trial,anotherDrug LIMIT 60")
 try:
-   results = graph.cypher.execute("MATCH (Company{companyName:'Cmp_"+str(randCompany)+"'})-[x:PRODUCES]->(Drug)<-[r:RELATED_TO]-(Trial)-[z:RELATED_TO]->(anotherDrug) RETURN Company,Drug,Trial,anotherDrug LIMIT 60")
+   results = graph.cypher.execute(queryToRun)
 except Exception as detail:
-   print str(sys.argv[2])+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+str(',9999999999')+','+str(detail)
+   print str(sys.argv[2])+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',9999999999')+','+str(detail)
 
-#print results
-#print datetime.now() - startTime
-print  str(sys.argv[2])+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(time.time() - startTime)
-
+print  str(sys.argv[2])+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(time.time() - startTime)
