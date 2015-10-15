@@ -12,12 +12,15 @@ export neoUrl=$2
 #export LOGFILE="log/neo4jStressTestRunLog_$1.`date +%Y%m%d%H%M`.log"
 export LOGFILE="log/neo4jStressTestRunLog_$1.log"
 
+export instanceType=`wget -q -O - http://instance-data/latest/meta-data/instance-type || echo REMOTE`
+#echo $instanceType
+
 pids=""
 
 for i in `seq 1 3`; do
    let loopNums=10**$i
    for i in `seq 1 $loopNums`; do
-      ./neo4jStressTest.py $neoUrl $loopNums >> $LOGFILE &
+      ./neo4jStressTest.py $neoUrl $loopNums $instanceType >> $LOGFILE &
       pids="$pids $!"
    done    
 
