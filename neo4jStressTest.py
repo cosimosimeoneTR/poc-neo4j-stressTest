@@ -3,6 +3,7 @@
 import json
 from py2neo import Graph, authenticate, Node
 import time,random,sys
+from datetime import datetime
 
 randCompany = random.randint(1, 1000)
 
@@ -24,9 +25,9 @@ graph = Graph()
 try:
    results = graph.cypher.execute("MATCH (Company{companyName:'Cmp_"+str(randCompany)+"'})-[x:PRODUCES]->(Drug)<-[r:RELATED_TO]-(Trial)-[z:RELATED_TO]->(anotherDrug) RETURN Company,Drug,Trial,anotherDrug LIMIT 60")
 except Exception as detail:
-   print str(sys.argv[2])+' , '+str(outConnectTo)+str(' , 9999999999')+' , '+str(detail)
+   print str(sys.argv[2])+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+str(',9999999999')+','+str(detail)
 
 #print results
 #print datetime.now() - startTime
-print  str(sys.argv[2])+' , '+str(outConnectTo)+' , '+str(time.time() - startTime)
+print  str(sys.argv[2])+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(time.time() - startTime)
 
