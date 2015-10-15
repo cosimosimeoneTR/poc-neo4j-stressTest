@@ -10,6 +10,7 @@ randCompany = random.randint(1, 1000)
 startTime = time.time()
 
 connectTo = sys.argv[1]
+outConnectTo = ''
 
 if connectTo == 'localhost':
    outConnectTo = connectTo+'-'+str(sys.argv[3])
