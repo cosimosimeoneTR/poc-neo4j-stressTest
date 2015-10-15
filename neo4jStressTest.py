@@ -9,7 +9,7 @@ randCompany = random.randint(1, 1000)
 #startTime = datetime.now()
 startTime = time.time()
 
-print str(sys.argv[1])+":7474"
+#print str(sys.argv[1])+":7474"
 authenticate(str(sys.argv[1])+":7474", "neo4j", "neo4j123")
 graph = Graph()
 
