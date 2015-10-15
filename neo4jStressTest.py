@@ -18,8 +18,8 @@ graph = Graph()
 try:
    results = graph.cypher.execute("MATCH (Company{companyName:'Cmp_"+str(randCompany)+"'})-[x:PRODUCES]->(Drug)<-[r:RELATED_TO]-(Trial)-[z:RELATED_TO]->(anotherDrug) RETURN Company,Drug,Trial,anotherDrug LIMIT 60")
 except Exception:
-   print str(sys.argv[2])+' , 9999999999'
+   print str(sys.argv[2])+' , '+str(sys.argv[1])+str(' , 9999999999')
 
 #print results
 #print datetime.now() - startTime
-print  str(sys.argv[2])+' , '+str(time.time() - startTime)
+print  str(sys.argv[2])+' , '+str(sys.argv[1])+' , '+str(time.time() - startTime)
