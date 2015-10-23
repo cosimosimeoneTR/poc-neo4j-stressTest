@@ -18,6 +18,13 @@ rndQuery=random.randint(0, len(query)-1)
 rndQueryVal=random.randint(0, 1000)
 queryToRun = query[rndQuery].replace('#',str(rndQueryVal))
 
+# Not congestion it on connections...
+# So, pone N seconds delay: wait x seconds, connect, wait N-x seconds, and run the query ;-)
+# wait x seconds...
+N=40
+rndWait=random.randint(0, N)
+time.sleep(rndWait)
+
 connectTo = sys.argv[1]
 outConnectTo = connectTo
 
@@ -25,9 +32,14 @@ if connectTo == 'localhost':
    outConnectTo = connectTo+'-'+str(sys.argv[3])
 
 
+# ... connect ...
 authenticate(str(connectTo)+":7474", "neo4j", "neo4j123")
 graph = Graph()
 
+# ... wait N-x seconds ...
+time.sleep(N-rndWait)
+
+# and run the query.
 startTime = time.time()
 try:
    results = graph.cypher.execute(queryToRun)
