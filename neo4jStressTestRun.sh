@@ -1,5 +1,8 @@
 #!/bin/bash
 
+mkdir log 2>/dev/null
+
+
 if [ $# -ne 2 ]; then
    echo "Please pass Test name for logfile (to sync log files when executing from different machines)."
    echo "(single word will do it)"
@@ -9,8 +12,8 @@ fi
 export testName=$1
 export neoUrl=$2
 
-#export LOGFILE="log/neo4jStressTestRunLog_$1.`date +%Y%m%d%H%M`.log"
-export LOGFILE="log/neo4jStressTestRunLog_$1.log"
+export LOGFILE="log/neo4jStressTestRunLog_$1.`date +%Y%m%d%H%M`.log"
+#export LOGFILE="log/neo4jStressTestRunLog_$1.log"
 export arch=`uname -a | cut -d " " -f 1`
 export pids=""
 export procs=0
