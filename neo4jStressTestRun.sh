@@ -1,5 +1,8 @@
 #!/bin/bash
 
+shopt -s expand_aliases
+alias echoi='echo `date +%Y-%m-%d\ %H:%M.%S` -INFO-'
+
 mkdir log 2>/dev/null
 
 
@@ -25,8 +28,8 @@ export instanceType=`wget -q -O - http://instance-data/latest/meta-data/instance
 
 for i in `seq 1 3`; do
    let loopNums=10**$i
+   echoi runnitg $loopNums loops...
    for i in `seq 1 $loopNums`; do
-      echo RUN $i
       ./neo4jStressTest.py $neoUrl $loopNums $instanceType >> $LOGFILE &
       pids="$pids $!"
       let procs=procs+1
@@ -38,8 +41,9 @@ for i in `seq 1 3`; do
       fi
    done
 
-   echo waiting for $pids
+   echoi waiting for pids
    wait $pids
+   echoi pids ended
    pids=""
 done
 
