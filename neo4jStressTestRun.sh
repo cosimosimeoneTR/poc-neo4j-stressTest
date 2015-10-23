@@ -25,6 +25,8 @@ export procs=0
 export instanceType=`wget -q -O - http://instance-data/latest/meta-data/instance-type || echo REMOTE`
 #echo $instanceType
 
+touch $LOGFILE
+
 
 for i in `seq 1 3`; do
    let loopNums=10**$i
@@ -41,9 +43,15 @@ for i in `seq 1 3`; do
       fi
    done
 
-   echoi waiting for pids
-   wait $pids
-   echoi pids ended
+   #echoi waiting for pids
+   #wait $pids
+   #echoi pids ended
+
+   #Since there are HUGE timeout problems, i wait some seconds, and then i go ahead...
+   #Can't wait 20 minutes for a pit to timeout... py2neo doesn't have the connection timeout option
+   sleep 180
+   killall neo4jStressTest.py
+
    pids=""
 done
 
