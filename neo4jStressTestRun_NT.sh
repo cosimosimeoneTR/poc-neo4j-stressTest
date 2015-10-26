@@ -15,8 +15,8 @@ fi
 export testName=$1
 export neoUrl=$2
 
-#export LOGFILE="log/neo4jStressTestRunLog_$1.`date +%Y%m%d%H%M`.log"
-export LOGFILE="log/neo4jStressTestRunLog_$1.log"
+#export myLOGFILE="log/neo4jStressTestRunLog_$1.`date +%Y%m%d%H%M`.log"
+export myLOGFILE="log/neo4jStressTestRunLog_$1.log"
 export arch=`uname -a | cut -d " " -f 1`
 export pids=""
 export procs=0
@@ -25,7 +25,7 @@ export procs=0
 export instanceType=`wget -q -O - http://instance-data/latest/meta-data/instance-type || echo REMOTE`
 #echo $instanceType
 
-#touch $LOGFILE
+#touch $myLOGFILE
 
 
 for i in `seq 1 3`; do
@@ -34,7 +34,7 @@ for i in `seq 1 3`; do
 
    for i in `seq 1 10`; do
       echoi "   Starting ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType "
-      nohup ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType >> $LOGFILE 2>&1 &
+      nohup ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType >> $myLOGFILE 2>&1 &
       pids="$pids $!"
 
       let procs=procs+1
