@@ -6,23 +6,27 @@ import time,random,sys,string
 from datetime import datetime
 import signal
 
-debug=1
+debug=0
+
+connectTo    =sys.argv[1]
+numParallel  =sys.argv[2]
+instanceType =sys.argv[3]
+parallelGrp  =sys.argv[4]
 
 ############################################################
 def sigterm_handler(_signo, _stack_frame):
     # Raises SystemExit(0):
-    print 'NT'+str(sys.argv[2])+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',9999999888')+','+str(detail)
+    print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',9999999888')+','+str(detail)
     sys.exit(0)
 signal.signal(signal.SIGTERM, sigterm_handler)
 ############################################################
 
 if debug==1: print "DBG-START"
 
-connectTo = sys.argv[1]
 outConnectTo = connectTo
 
 if connectTo == 'localhost':
-   outConnectTo = connectTo+'-'+str(sys.argv[3])
+   outConnectTo = connectTo+'-'+str(instanceType)
    if debug==1: print "DBG-outConnectTo="+str(outConnectTo)
 
 randCompany = random.randint(1, 1000)
@@ -60,7 +64,7 @@ if debug==1: print "DBG-sleeping "+str((N-rndWait)+1)
 time.sleep((N-rndWait)+1)
 
 # and run the queries
-for myIndex in range(0,int(sys.argv[2])):
+for myIndex in range(0,int(numParallel)):
    startTime = time.time()
 
    try:
@@ -73,9 +77,9 @@ for myIndex in range(0,int(sys.argv[2])):
       results = graph.cypher.execute(queryToRun)
       if debug==1: print "DBG-executed"
    except Exception as detail:
-      print 'NT'+str(sys.argv[2])+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',9999999999')+','+str(detail)
+      print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',9999999999')+','+str(detail)
    else:
-      print 'NT'+str(sys.argv[2])+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(time.time() - startTime)
+      print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(time.time() - startTime)
 
    graph = ""
 if debug==1: print "DBG-END"

@@ -30,11 +30,11 @@ export instanceType=`wget -q -O - http://instance-data/latest/meta-data/instance
 
 for i in `seq 1 3`; do
    let loopNums=10**$i
-   echoi Runnitg $loopNums loops...
+   echoi Running $loopNums loops...
 
    for i in `seq 1 10`; do
       echoi "   Starting ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType "
-      nohup ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType >> $myLOGFILE 2>&1 &
+      nohup ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType $i  >> $myLOGFILE 2>&1 &
       pids="$pids $!"
 
       let procs=procs+1
@@ -56,7 +56,8 @@ for i in `seq 1 3`; do
    echoi Sleeping...
    sleep 100
    echoi Killall
-   killall neo4jStressTest_NT.py
+   #killall neo4jStressTest_NT.py
+   kill $pids
 
    pids=""
 done
