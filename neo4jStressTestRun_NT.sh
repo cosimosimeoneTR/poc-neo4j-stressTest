@@ -48,14 +48,14 @@ for i in `seq 1 3`; do
 
    done
 
-   echoi waiting for pids
-   wait $pids
-   echoi pids ended
+   #echoi waiting for pids
+   #wait $pids
+   #echoi pids ended
 
    #Since there are HUGE timeout problems, i wait some seconds, and then i go ahead...
    #Can't wait 20 minutes for a pit to timeout... py2neo doesn't have the connection timeout option
-   #sleep 180
-   #killall neo4jStressTest.py
+   sleep 180
+   killall neo4jStressTest_NT.py
 
    pids=""
 done

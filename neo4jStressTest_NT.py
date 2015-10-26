@@ -61,4 +61,5 @@ for myIndex in range(0,int(sys.argv[2])):
    else:
       print 'NT'+str(sys.argv[2])+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(time.time() - startTime)
 
+   graph = ""
 if debug==1: print "DBG-END"
