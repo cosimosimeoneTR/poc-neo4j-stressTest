@@ -81,6 +81,9 @@ for myIndex in range(0,int(numParallel)):
    else:
       print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(time.time() - startTime)
 
+   sys.stdout.flush()
+
+
    graph = ""
 if debug==1: print "DBG-END"
 sys.stdout.flush()
