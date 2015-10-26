@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import json
+import json, sys
 from py2neo import Graph, authenticate, Node
 import time,random,sys,string
 from datetime import datetime
@@ -83,3 +83,4 @@ for myIndex in range(0,int(numParallel)):
 
    graph = ""
 if debug==1: print "DBG-END"
+sys.stdout.flush()
