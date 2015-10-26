@@ -5,11 +5,16 @@ from py2neo import Graph, authenticate, Node
 import time,random,sys,string
 from datetime import datetime
 
+debug=1
+
+if debug==1: print "DBG-START"
+
 connectTo = sys.argv[1]
 outConnectTo = connectTo
 
 if connectTo == 'localhost':
    outConnectTo = connectTo+'-'+str(sys.argv[3])
+   if debug==1: print "DBG-outConnectTo="+str(outConnectTo)
 
 randCompany = random.randint(1, 1000)
 query={}
@@ -24,27 +29,36 @@ query[6] = "MATCH (n:Company) RETURN n LIMIT 2"
 # Not congestion it on connections...
 # So, pone N seconds delay: wait x seconds, connect, wait N-x seconds, and run the query ;-)
 # wait x seconds...
-N=10
+N=5
 rndWait=random.randint(0, N)
+if debug==1: print "DBG-sleeping "+str(rndWait)
 time.sleep(rndWait)
 
 # ... connect ...
+if debug==1: print "DBG-connecting..."
 authenticate(str(connectTo)+":7474", "neo4j", "neo4j123")
-graph = Graph()
+if debug==1: print "DBG-connected"
 
 # ... wait N-x seconds ...
-time.sleep(N-rndWait)
+if debug==1: print "DBG-sleeping "+str((N-rndWait)+1)
+time.sleep((N-rndWait)+1)
 
 # and run the queries
 for myIndex in range(0,int(sys.argv[2])):
    startTime = time.time()
+
    try:
+      graph = Graph()
       rndQuery=random.randint(0, len(query)-1)
       rndQueryVal=random.randint(0, 1000)
       queryToRun = query[rndQuery].replace('#',str(rndQueryVal))
 
+      if debug==1: print "DBG-executing... " + str(queryToRun)
       results = graph.cypher.execute(queryToRun)
+      if debug==1: print "DBG-executed"
    except Exception as detail:
       print 'NT'+str(sys.argv[2])+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',9999999999')+','+str(detail)
    else:
       print 'NT'+str(sys.argv[2])+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(time.time() - startTime)
+
+if debug==1: print "DBG-END"
