@@ -25,7 +25,7 @@ export procs=0
 export instanceType=`wget -q -O - http://instance-data/latest/meta-data/instance-type || echo REMOTE`
 #echo $instanceType
 
-touch $LOGFILE
+#touch $LOGFILE
 
 
 for i in `seq 1 3`; do
@@ -34,7 +34,7 @@ for i in `seq 1 3`; do
 
    for i in `seq 1 10`; do
       echoi "   Starting ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType "
-      nohup ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType >> $LOGFILE &
+      nohup ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType >> $LOGFILE 2>&1 &
       pids="$pids $!"
 
       let procs=procs+1
