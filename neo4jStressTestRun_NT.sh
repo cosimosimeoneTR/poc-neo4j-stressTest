@@ -29,13 +29,12 @@ touch $LOGFILE
 
 
 for i in `seq 1 3`; do
-
    let loopNums=10**$i
-
-   echoi runnitg $loopNums loops...
+   echoi Runnitg $loopNums loops...
 
    for i in `seq 1 10`; do
-      ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType >> $LOGFILE &
+      echoi "   Starting ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType "
+      nohup ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType >> $LOGFILE &
       pids="$pids $!"
 
       let procs=procs+1
@@ -43,7 +42,7 @@ for i in `seq 1 3`; do
       if [ "$arch" != "Linux" ] && [ "$procs" -gt "399" ]; then
         sleep 3
         procs=0
-        #echo "sleeping..."
+        echoi "sleeping..."
       fi
 
    done
@@ -54,7 +53,9 @@ for i in `seq 1 3`; do
 
    #Since there are HUGE timeout problems, i wait some seconds, and then i go ahead...
    #Can't wait 20 minutes for a pit to timeout... py2neo doesn't have the connection timeout option
-   sleep 180
+   echoi Sleeping...
+   sleep 100
+   echoi Killall
    killall neo4jStressTest_NT.py
 
    pids=""
