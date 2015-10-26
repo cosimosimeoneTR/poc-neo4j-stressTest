@@ -16,7 +16,7 @@ parallelGrp  =sys.argv[4]
 ############################################################
 def sigterm_handler(_signo, _stack_frame):
     # Raises SystemExit(0):
-    print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',9999999888')+','+str(detail)
+    print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',9999999888')+',KILLED'
     sys.exit(0)
 signal.signal(signal.SIGTERM, sigterm_handler)
 ############################################################
