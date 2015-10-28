@@ -32,7 +32,7 @@ if connectTo == 'localhost':
 randCompany = random.randint(1, 1000)
 query={}
 query[1] = "MATCH (n:Company) RETURN n LIMIT 2"
-query[2] = "MATCH (n:Drug{drunName:'Drg_1'}) RETURN n"
+query[2] = "MATCH (n:Drug{drugName:'Drg_1'}) RETURN n"
 query[3] = "MATCH (n:Company{companyName:'Cmp_1'}) RETURN n"
 query[4] = "MATCH n RETURN n LIMIT 25"
 query[5] = "MATCH n RETURN n LIMIT 2"

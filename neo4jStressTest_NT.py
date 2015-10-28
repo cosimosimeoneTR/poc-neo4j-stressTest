@@ -38,11 +38,11 @@ query[3] = "MATCH (Company:Company{attr9:'asqwdasdasda'})-[x:CMP2DRG]->(Drug)<-[
 query[4] = "MATCH (Drug:Drug{attr1:'asqwdasdasda'})<-[r:TRL2DRG2]-(Trial)-[z:TRL2DRG3]->(anotherDrug) RETURN Drug,Trial,anotherDrug "
 query[5] = "MATCH (Drug:Drug{attr9:'asqwdasdasda'})<-[r:TRL2DRG3]-(Trial)-[z:TRL2DRG1]->(anotherDrug) RETURN Drug,Trial,anotherDrug "
 query[6] = "MATCH (n:Company) RETURN n LIMIT 2"
-query[7] = "MATCH (n:Drug{drunName:'Drg_1'}) RETURN n"
+query[7] = "MATCH (n:Drug{drugName:'Drg_1'}) RETURN n"
 query[8] = "MATCH (n:Company{companyName:'Cmp_1'}) RETURN n"
 query[9] = "MATCH n RETURN n LIMIT 2"
 #query[1] = "MATCH (n:Company) RETURN n LIMIT 2"
-#query[2] = "MATCH (n:Drug{drunName:'Drg_1'}) RETURN n"
+#query[2] = "MATCH (n:Drug{drugName:'Drg_1'}) RETURN n"
 #query[3] = "MATCH (n:Company{companyName:'Cmp_1'}) RETURN n"
 #query[4] = "MATCH n RETURN n LIMIT 25"
 
