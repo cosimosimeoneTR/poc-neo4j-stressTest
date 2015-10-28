@@ -16,7 +16,7 @@ parallelGrp  =sys.argv[4]
 ############################################################
 def sigterm_handler(_signo, _stack_frame):
     # Raises SystemExit(0):
-    print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',9999999888')+',KILLED'
+    print 'EZY'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',9999999888')+',KILLED'
     sys.exit(0)
 signal.signal(signal.SIGTERM, sigterm_handler)
 ############################################################
@@ -70,9 +70,9 @@ for myIndex in range(0,int(numParallel)):
       results = graph.cypher.execute(queryToRun)
       if debug==1: print "DBG-executed"
    except Exception as detail:
-      print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',9999999999')+','+str(detail)
+      print 'EZY'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',9999999999')+','+str(detail)
    else:
-      print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(time.time() - startTime)
+      print 'EZY'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(time.time() - startTime)
 
    sys.stdout.flush()
 
