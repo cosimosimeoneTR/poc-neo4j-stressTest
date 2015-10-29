@@ -1,17 +1,18 @@
-neo4j-shell
-
-
-create index on :trial(attr5)           ;
-create index on :Disease(diseaseId)     ;
-create index on :Disease(id)            ;
-create index on :Disease(attr1)         ;
-create index on :Drugs(attr1)           ;
-create index on :Drugs(attr0)           ;
-create index on :Drugs(drugId)          ;
-create index on :Disease(diseaseName)   ;
-create index on :trial(trialId)         ;
-create index on :trial(trialName)       ;
-create index on :Company(companyName)   ;
-
-schema ls
-
+echo;echo;echo;
+date
+echo;echo;
+neo4j-shell -c "create index on :Drug(drugName)         ;"
+neo4j-shell -c "create index on :Drug(attr1)            ;"
+neo4j-shell -c "create index on :Drug(attr9)            ;"
+neo4j-shell -c "create index on :Drug(drugId)           ;"
+neo4j-shell -c "create index on :Company(companyName)   ;"
+neo4j-shell -c "create index on :Company(attr1)         ;"
+neo4j-shell -c "create index on :Company(attr9)         ;"
+neo4j-shell -c "create index on :Disease(diseaseId)     ;"
+neo4j-shell -c "create index on :Disease(id)            ;"
+neo4j-shell -c "create index on :Disease(attr1)         ;"
+neo4j-shell -c "create index on :Disease(diseaseName)   ;"
+neo4j-shell -c "create index on :trial(trialId)         ;"
+neo4j-shell -c "create index on :trial(trialName)       ;"
+neo4j-shell -c "create index on :trial(attr5)           ;"
+watch 'date;neo4j-shell -c "schema ls"'
