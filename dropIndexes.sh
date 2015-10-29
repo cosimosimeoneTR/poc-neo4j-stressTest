@@ -16,4 +16,3 @@ neo4j-shell -c "drop index on :Disease(diseaseName)   ;"
 neo4j-shell -c "drop index on :trial(trialId)         ;"
 neo4j-shell -c "drop index on :trial(trialName)       ;"
 neo4j-shell -c "drop index on :trial(attr5)           ;"
-watch 'date;neo4j-shell -c "schema ls"'
