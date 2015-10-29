@@ -1,3 +1,4 @@
+set -x
 echo;echo;echo;
 date
 echo;echo;
