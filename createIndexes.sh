@@ -16,4 +16,4 @@ neo4j-shell -c "create index on :Disease(diseaseName)   ;"
 neo4j-shell -c "create index on :trial(trialId)         ;"
 neo4j-shell -c "create index on :trial(trialName)       ;"
 neo4j-shell -c "create index on :trial(attr5)           ;"
-watch 'date;neo4j-shell -c "schema ls"'
+#watch 'date;neo4j-shell -c "schema ls"'
