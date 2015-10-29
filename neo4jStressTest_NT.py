@@ -31,19 +31,19 @@ if connectTo == 'localhost':
 
 randCompany = random.randint(1, 1000)
 query={}
-query[0] = "MATCH (Company:Company{companyName:'Cmp_#'})-[x:CMP2DRG]->(Drug)<-[r:TRL2DRG1]-(Trial)-[z:TRL2DRG2]->(anotherDrug) RETURN Company,Drug,Trial,anotherDrug "
-query[1] = "MATCH (Drug:Drug{drugName:'Drg_#'})<-[r:TRL2DRG1]-(Trial)-[z:RELATED_TO]->(anotherDrug) RETURN Drug,Trial,anotherDrug "
-query[2] = "MATCH (Company:Company{attr1:'asqwdasdasda'})-[x:CMP2DRG]->(Drug)<-[r:TRL2DRG2]-(Trial)-[z:TRL2DRG1]->(anotherDrug) RETURN Company,Drug,Trial,anotherDrug "
-query[3] = "MATCH (Company:Company{attr9:'asqwdasdasda'})-[x:CMP2DRG]->(Drug)<-[r:TRL2DRG1]-(Trial)-[z:TRL2DRG2]->(anotherDrug) RETURN Company,Drug,Trial,anotherDrug "
-query[4] = "MATCH (Drug:Drug{attr1:'asqwdasdasda'})<-[r:TRL2DRG2]-(Trial)-[z:TRL2DRG3]->(anotherDrug) RETURN Drug,Trial,anotherDrug "
-query[5] = "MATCH (Drug:Drug{attr9:'asqwdasdasda'})<-[r:TRL2DRG3]-(Trial)-[z:TRL2DRG1]->(anotherDrug) RETURN Drug,Trial,anotherDrug "
+query[0] = "MATCH (Company:Company{companyName:'Cmp_#'})-[x:CMP2DRG]->(Drug)<-[r:TRL2DRG1]-(Trial)-[z:TRL2DRG2]->(anotherDrug) RETURN Company,Drug,Trial,anotherDrug LIMIT 100"
+query[1] = "MATCH (Drug:Drug{drugName:'Drg_#'})<-[r:TRL2DRG1]-(Trial)-[z:RELATED_TO]->(anotherDrug) RETURN Drug,Trial,anotherDrug LIMIT 100"
+query[2] = "MATCH (Company:Company{attr1:'asqwdasdasda'})-[x:CMP2DRG]->(Drug)<-[r:TRL2DRG2]-(Trial)-[z:TRL2DRG1]->(anotherDrug) RETURN Company,Drug,Trial,anotherDrug LIMIT 100"
+query[3] = "MATCH (Company:Company{attr9:'asqwdasdasda'})-[x:CMP2DRG]->(Drug)<-[r:TRL2DRG1]-(Trial)-[z:TRL2DRG2]->(anotherDrug) RETURN Company,Drug,Trial,anotherDrug LIMIT 100"
+query[4] = "MATCH (Drug:Drug{attr1:'asqwdasdasda'})<-[r:TRL2DRG2]-(Trial)-[z:TRL2DRG3]->(anotherDrug) RETURN Drug,Trial,anotherDrug LIMIT 100"
+query[5] = "MATCH (Drug:Drug{attr9:'asqwdasdasda'})<-[r:TRL2DRG3]-(Trial)-[z:TRL2DRG1]->(anotherDrug) RETURN Drug,Trial,anotherDrug LIMIT 100"
 query[6] = "MATCH (n:Company) RETURN n LIMIT 2"
-query[7] = "MATCH (n:Drug{drugName:'Drg_1'}) RETURN n"
-query[8] = "MATCH (n:Company{companyName:'Cmp_1'}) RETURN n"
+query[7] = "MATCH (n:Drug{drugName:'Drg_1'}) RETURN n LIMIT 100"
+query[8] = "MATCH (n:Company{companyName:'Cmp_1'}) RETURN n LIMIT 100"
 query[9] = "MATCH n RETURN n LIMIT 2"
 #query[1] = "MATCH (n:Company) RETURN n LIMIT 2"
-#query[2] = "MATCH (n:Drug{drugName:'Drg_1'}) RETURN n"
-#query[3] = "MATCH (n:Company{companyName:'Cmp_1'}) RETURN n"
+#query[2] = "MATCH (n:Drug{drugName:'Drg_1'}) RETURN n LIMIT 100"
+#query[3] = "MATCH (n:Company{companyName:'Cmp_1'}) RETURN n LIMIT 100"
 #query[4] = "MATCH n RETURN n LIMIT 25"
 
 # Not congestion it on connections...
