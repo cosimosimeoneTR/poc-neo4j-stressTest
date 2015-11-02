@@ -54,7 +54,11 @@ for i in `seq 1 3`; do
    #Since there are HUGE timeout problems, i wait some seconds, and then i go ahead...
    #Can't wait 20 minutes for a pit to timeout... py2neo doesn't have the connection timeout option
    echoi Sleeping...
-   sleep 100
+   if [ $i -lt 3 ]; then
+      sleep 30
+   else
+      sleep 120
+   fi
    echoi Killall
    #killall neo4jStressTest_NT.py
    kill $pids
