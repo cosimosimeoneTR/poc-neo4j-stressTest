@@ -13,4 +13,7 @@ neo4j-shell -c "drop constraint on (e:entityH) assert e.id is unique;"
 neo4j-shell -c "drop constraint on (e:entityI) assert e.id is unique;"
 neo4j-shell -c "drop constraint on (e:entityJ) assert e.id is unique;"
 
+neo4j-shell -c "schema ls"
 #watch 'date;neo4j-shell -c "schema ls"'
+
+date
