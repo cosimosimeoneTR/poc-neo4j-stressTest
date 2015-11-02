@@ -33,13 +33,13 @@ randEntity = random.randint(1, 200000000)
 query={}
 query[0] = "MATCH (z:entityC{id:#})-[x:ENTC2ENTB]->()-[r:ENTB2ENTA]->() RETURN r,x LIMIT 250"
 query[1] = "MATCH (z)-[x:ENTC2ENTB]->(y:entityB{id:#})-[r:ENTB2ENTD]->(w) RETURN z,x,y,w LIMIT 250"
-query[2] = "MATCH (z)-[x:ENTC2ENTB]->(y:entityB{id:#})-[r:ENTB2ENTD]->(w) RETURN z,x,y,w LIMIT 250"
-query[3] = "MATCH (ee)-[red:ENTE2ENTD]->(ed)-[rdb:ENTD2ENTB]->(eb)-[rbd:ENTB2ENTD]->(ed2)-[rdc:ENTD2ENTC]->(ec:entityC{id:#}) RETURN ee, red, ed, rdb, eb, ed2, ec LIMIT 250"
-query[4] = "MATCH (ee)-[red:ENTE2ENTD]->(ed)-[rdb:ENTD2ENTB]->(eb)-[rbd:ENTB2ENTD]->(ed2)-[rdc:ENTD2ENTC{relationType:'Relation'}]->(ec:entityC{id:#}) RETURN ee, red, ed, rdb, eb, ed2, ec LIMIT 250"
-query[5] = "MATCH (ee:entityE{id:#})-[red:ENTE2ENTD]->(ed)-[rdb:ENTD2ENTB]->(eb)-[rbd:ENTB2ENTD]->(ed2)-[rdc:ENTD2ENTC{relationType:'Relation'}]->(ec:entityC{id:%}) RETURN ee, red, ed, rdb, eb, ed2, ec LIMIT 250"
+query[2] = "MATCH (z:entityC{id:#})-[x:ENTC2ENTB]->(y)-[r:ENTB2ENTD]->(w) where y.id > 99 RETURN z,x,y,w LIMIT 250"
+query[3] = "MATCH (ee:entityE{id:#})-[red:ENTE2ENTD]->(ed)-[rdb:ENTD2ENTB]->(eb)-[rbd:ENTB2ENTD]->(ed2)-[rdc:ENTD2ENTC]->(ec) RETURN ee, red, ed, rdb, eb, ed2, ec LIMIT 250"
+query[4] = "MATCH (eb1:entityB{id:#})-[rbd1:ENTB2ENTD]->(ed1)-[rdb1:ENTD2ENTB]->(eb2)-[rbd2:ENTB2ENTD]->(ed2)-[rdc:ENTD2ENTC]->(ec2) RETURN eb1, rbd1, ed1, rdb1, eb2, ed2, ec2 LIMIT 250"
+query[5] = "MATCH (ee:entityE{id:#})-[red:ENTE2ENTD]->(ed)-[rdb:ENTD2ENTB]->(eb)-[rbd:ENTB2ENTD]->(ed2)-[rdc:ENTD2ENTC{relationType:'Relation'}]->(ec) RETURN ee, red, ed, rdb, eb, ed2, ec LIMIT 250"
 query[6] = "MATCH (eb:entityB{id:#})-[rbd:ENTB2ENTD]->(ed)-[rdb:ENTD2ENTB]->(ed2) RETURN eb, rbd, ed,rdb,ed2 LIMIT 250"
 query[7] = "MATCH (ed:entityD{id:#})-[rdc:ENTD2ENTC]->(ec)-[rcb:ENTC2ENTB]->(eb) RETURN ed, rdc, ec,rcb,eb LIMIT 250"
-query[8] = "MATCH (ed:entityD{id:#})-[rdc:ENTD2ENTC]->(ec)-[rcb:ENTC2ENTB]->(eb)-[rba:ENTB2ENTA]->(ea:entityA{id:%}) RETURN ed, rdc, ec,rcb,eb,rba,ea LIMIT 250"
+query[8] = "MATCH (ed:entityD{id:#})-[rdc:ENTD2ENTC]->(ec)-[rcb:ENTC2ENTB]->(eb)-[rba:ENTB2ENTA]->(ea) RETURN ed, rdc, ec,rcb,eb,rba,ea LIMIT 250"
 query[9] = "MATCH (ed:entityD{id:#})-[rdc:ENTD2ENTC]->(ec)-[rcb:ENTC2ENTB]->(eb)-[rbd:ENTB2ENTD]->(ed2)-[rdb:ENTD2ENTB]->(eb2) RETURN ed, rdc, ec,rcb,eb,rbd,ed2,rdb,eb2 LIMIT 250"
 
 # Not congestion it on connections...
