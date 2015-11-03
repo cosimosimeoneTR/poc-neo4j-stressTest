@@ -12,6 +12,10 @@ connectTo    =sys.argv[1]
 numParallel  =sys.argv[2]
 instanceType =sys.argv[3]
 parallelGrp  =sys.argv[4]
+try:
+   showResult   =sys.argv[5]
+except IndexError:
+   showResult ="N"
 
 ############################################################
 def sigterm_handler(_signo, _stack_frame):
@@ -77,7 +81,8 @@ for myIndex in range(0,int(numParallel)):
    except Exception as detail:
       print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',9999999999')+','+str(detail)
    else:
-      print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(time.time() - startTime)
+      if showResult == "N": print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(time.time() - startTime)
+      else: print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(time.time() - startTime)+',,,"'+str(results).replace('"','""')+'"'
 
    sys.stdout.flush()
 
