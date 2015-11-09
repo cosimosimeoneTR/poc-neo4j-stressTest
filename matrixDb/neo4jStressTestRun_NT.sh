@@ -35,7 +35,7 @@ for i in `seq 1 3`; do
 
    for i in `seq 1 10`; do
       echoi "   Starting ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType "
-      nohup ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType $i  >> $myLOGFILE 2>&1 &
+      nohup ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType $i Y >> $myLOGFILE 2>&1 &
       pids="$pids $!"
 
       let procs=procs+1
