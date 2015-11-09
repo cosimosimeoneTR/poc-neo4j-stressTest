@@ -35,7 +35,7 @@ for i in `seq 1 3`; do
 
    for j in `seq 1 10`; do
       echoi "   Starting ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType "
-      nohup ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType $i Y >> $myLOGFILE 2>&1 &
+      nohup ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType $i N >> $myLOGFILE 2>&1 &
       pids="$pids $!"
 
       let procs=procs+1
@@ -58,7 +58,7 @@ for i in `seq 1 3`; do
    if [ $i -lt 3 ]; then
       sleep 30
    else
-      sleep 90
+      sleep 120
    fi
    echoi Killall
    #killall neo4jStressTest_NT.py
