@@ -36,7 +36,7 @@ if connectTo == 'localhost':
 randEntity = random.randint(1, 200000000)
 query={}
 query[0] = "MATCH (z:entityC{id:#})-[x:ENTC2ENTB]->()-[r:ENTB2ENTA]->() RETURN r,x LIMIT 250"
-query[1] = "MATCH (z)-[x:ENTC2ENTB]->(y:entityB{id:#})-[r:ENTB2ENTD]->(w) RETURN z,x,y,w LIMIT 250"
+query[1] = "MATCH (z)-[x:ENTC2ENTB]->(y)-[r:ENTB2ENTD]->(w:entityD{id:#}) RETURN z,x,y,w LIMIT 250"
 query[2] = "MATCH (z:entityC{id:#})-[x:ENTC2ENTB]->(y)-[r:ENTB2ENTD]->(w) where y.id > 99 RETURN z,x,y,w LIMIT 250"
 query[3] = "MATCH (ee:entityE{id:#})-[red:ENTE2ENTD]->(ed)-[rdb:ENTD2ENTB]->(eb)-[rbd:ENTB2ENTD]->(ed2)-[rdc:ENTD2ENTC]->(ec) RETURN ee, red, ed, rdb, eb, ed2, ec LIMIT 250"
 query[4] = "MATCH (eb1:entityB{id:#})-[rbd1:ENTB2ENTD]->(ed1)-[rdb1:ENTD2ENTB]->(eb2)-[rbd2:ENTB2ENTD]->(ed2)-[rdc:ENTD2ENTC]->(ec2) RETURN eb1, rbd1, ed1, rdb1, eb2, ed2, ec2 LIMIT 250"
