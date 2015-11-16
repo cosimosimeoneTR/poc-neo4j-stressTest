@@ -16,7 +16,7 @@ export testName=$1
 export neoUrl=$2
 
 #export myLOGFILE="log/neo4jStressTestRunLog_$1.`date +%Y%m%d%H%M`.log"
-export myLOGFILE="log/neo4jStressTestRunLog_$1.log"
+export myLOGFILE="log/neo4jStressTestRunLog_$1.csv"
 export arch=`uname -a | cut -d " " -f 1`
 export pids=""
 export procs=0
