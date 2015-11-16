@@ -35,16 +35,16 @@ if connectTo == 'localhost':
 
 randEntity = random.randint(1, 200000000)
 query={}
-query[0] = "MATCH (organization:organization{id:#})-[x:organization2patent]->(patent)-[r:patent2bioactive]->(bioactive)-[z:bioactive2target]->(target) RETURN organization,patent,bioactive,target LIMIT 1000"
-query[1] = "MATCH (biomarker1:biomarker{id:#})-[zz:biomarker2biomarker]->(biomarker2:biomarker)-[r:biomarker2biomarkeruse]->(biomarkeruse1:biomarkeruse)-[rr:biomarkeruse2biomarkeruse]->(biomarkeruse2:biomarkeruse) RETURN * LIMIT 1000"
-query[2] = "MATCH (protein:protein{id:#})-[protein2gene]->(gene)-[gene2genevariant]->(genevariant)-[genevariant2bioactive]-(bioactive)-[bioactive2bioactive]->(bioactive2) return * limit 1000"
-query[3] = "MATCH (a:biomarker{id:#})-[b:biomarker2biomarker]->(c:biomarker)-[d:biomarker2gene]->(e:gene)-[f:gene2gene]->(g:gene)-[h:gene2genevariant]->(i:genevariant)-[j:genevariant2bioactive]->(k:bioactive)-[l:bioactive2bioactive]->(m:bioactive)-[n:bioactive2target]->(o:target)-[p:target2target]->(q:target) RETURN * LIMIT 1000"
-query[4] = "MATCH (a:experimentalpharmacology{id:#})-[b:experimentalpharmacology2experimentalmodel]->(c:experimentalmodel)-[d:experimentalmodel2conditiondesease]->(e:conditiondesease) return * limit 1000"
-query[5] = "MATCH (a:organization:organization{id:#})-[b:organization2patent]->(c:patent)-[d:patent2bioactive]->(e:bioactive)-[f:bioactive2bioactive]-(g:bioactive)-[h:bioactive2drugdruginteraction]->(i:drugdruginteraction)-[j:drugdruginteraction2bioactive]->(k:bioactive)-[l:bioactive2bioactive]-(m:bioactive)-[n:bioactive2conditiondesease]-(o:conditiondesease)   RETURN * LIMIT 1000"
-query[6] = "MATCH (a:bioactive{id:#})-[r:bioactive2bioactive*1..9]->() RETURN * LIMIT 10000"
-query[7] = "MATCH (a:protein{id:#})-[b:protein2gene]->(c:gene)-[d:gene2genevariant]->(e:genevariant)-[f:genevariant2conditiondesease]->(g:conditiondesease) RETURN * LIMIT 10000"
-query[8] = "MATCH (a:gene{id:#})-[b:gene2protein*1..9]->(c:protein)-[d:protein2gene]-(e:gene) RETURN * LIMIT 100"
-query[9] = "MATCH (a:biomarker{id:#})-[b:biomarker2biomarkeruse*1..9]->(c:biomarkeruse)-[d:biomarkeruse2biomarkeruse]-(e:biomarkeruse) RETURN * LIMIT 10000"
+query[0] = "MATCH (organization:organization{id:#})-[x:organization2patent]->(patent)-[r:patent2bioactive]->(bioactive)-[z:bioactive2target]->(target) RETURN count(*) LIMIT 1000"
+query[1] = "MATCH (biomarker1:biomarker{id:#})-[zz:biomarker2biomarker]->(biomarker2:biomarker)-[r:biomarker2biomarkeruse]->(biomarkeruse1:biomarkeruse)-[rr:biomarkeruse2biomarkeruse]->(biomarkeruse2:biomarkeruse) RETURN count(*) LIMIT 1000"
+query[2] = "MATCH (protein:protein{id:#})-[protein2gene]->(gene)-[gene2genevariant]->(genevariant)-[genevariant2bioactive]-(bioactive)-[bioactive2bioactive]->(bioactive2) return count(*) limit 1000"
+query[3] = "MATCH (a:biomarker{id:#})-[b:biomarker2biomarker]->(c:biomarker)-[d:biomarker2gene]->(e:gene)-[f:gene2gene]->(g:gene)-[h:gene2genevariant]->(i:genevariant)-[j:genevariant2bioactive]->(k:bioactive)-[l:bioactive2bioactive]->(m:bioactive)-[n:bioactive2target]->(o:target)-[p:target2target]->(q:target) RETURN count(*) LIMIT 1000"
+query[4] = "MATCH (a:experimentalpharmacology{id:#})-[b:experimentalpharmacology2experimentalmodel]->(c:experimentalmodel)-[d:experimentalmodel2conditiondesease]->(e:conditiondesease) return count(*) limit 1000"
+query[5] = "MATCH (a:organization:organization{id:#})-[b:organization2patent]->(c:patent)-[d:patent2bioactive]->(e:bioactive)-[f:bioactive2bioactive]-(g:bioactive)-[h:bioactive2drugdruginteraction]->(i:drugdruginteraction)-[j:drugdruginteraction2bioactive]->(k:bioactive)-[l:bioactive2bioactive]-(m:bioactive)-[n:bioactive2conditiondesease]-(o:conditiondesease)   RETURN count(*) LIMIT 1000"
+query[6] = "MATCH (a:bioactive{id:#})-[r:bioactive2bioactive*1..9]->() RETURN count(*) LIMIT 10000"
+query[7] = "MATCH (a:protein{id:#})-[b:protein2gene]->(c:gene)-[d:gene2genevariant]->(e:genevariant)-[f:genevariant2conditiondesease]->(g:conditiondesease) RETURN count(*) LIMIT 10000"
+query[8] = "MATCH (a:gene{id:#})-[b:gene2protein*1..9]->(c:protein)-[d:protein2gene]-(e:gene) RETURN count(*) LIMIT 100"
+query[9] = "MATCH (a:biomarker{id:#})-[b:biomarker2biomarkeruse*1..9]->(c:biomarkeruse)-[d:biomarkeruse2biomarkeruse]-(e:biomarkeruse) RETURN count(*) LIMIT 10000"
 
 # Not congestion it on connections...
 # So, pone N seconds delay: wait x seconds, connect, wait N-x seconds, and run the query ;-)
