@@ -12,6 +12,10 @@ connectTo    =sys.argv[1]
 numParallel  =sys.argv[2]
 instanceType =sys.argv[3]
 parallelGrp  =sys.argv[4]
+try:
+   showResult   =sys.argv[5]
+except IndexError:
+   showResult ="N"
 
 ############################################################
 def sigterm_handler(_signo, _stack_frame):
@@ -29,7 +33,7 @@ if connectTo == 'localhost':
    outConnectTo = connectTo+'-'+str(instanceType)
    if debug==1: print "DBG-outConnectTo="+str(outConnectTo)
 
-randCompany = random.randint(1, 1000)
+randEntity = random.randint(1, 200000000)
 query={}
 query[0] = "MATCH (organization:organization{id:#})-[x:organization2patent]->(patent)-[r:patent2bioactive]->(bioactive)-[z:bioactive2target]->(target) RETURN organization,patent,bioactive,target LIMIT 1000"
 query[1] = "MATCH (biomarker1:biomarker{id:#})-[zz:biomarker2biomarker]->(biomarker2:biomarker)-[r:biomarker2biomarkeruse]->(biomarkeruse1:biomarkeruse)-[rr:biomarkeruse2biomarkeruse]->(biomarkeruse2:biomarkeruse) RETURN * LIMIT 1000"
@@ -66,8 +70,10 @@ for myIndex in range(0,int(numParallel)):
    try:
       graph = Graph()
       rndQuery=random.randint(0, len(query)-1)
-      rndQueryVal=random.randint(0, 1000)
+      rndQueryVal=random.randint(0, 200000000)
       queryToRun = query[rndQuery].replace('#',str(rndQueryVal))
+      rndQueryVal=random.randint(0, 200000000)
+      queryToRun = queryToRun.replace('%',str(rndQueryVal))
 
       if debug==1: print "DBG-executing... " + str(queryToRun)
       results = graph.cypher.execute(queryToRun)
@@ -75,7 +81,8 @@ for myIndex in range(0,int(numParallel)):
    except Exception as detail:
       print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',9999999999')+','+str(detail)
    else:
-      print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(time.time() - startTime)
+      if showResult == "N": print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(time.time() - startTime)
+      else: print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(time.time() - startTime)+',,,"'+str(results).replace('"','""')+'"'
 
    sys.stdout.flush()
 
