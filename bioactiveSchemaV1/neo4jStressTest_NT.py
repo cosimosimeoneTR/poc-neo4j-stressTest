@@ -20,7 +20,6 @@ try:
    nodeCount   =int(sys.argv[6])
 except IndexError:
    nodeCount = 200000000
-print 'nodeCount=',nodeCount
 
 
 ############################################################
