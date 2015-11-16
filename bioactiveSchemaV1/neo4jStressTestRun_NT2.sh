@@ -26,6 +26,7 @@ export instanceType=`wget -q -O - http://instance-data/latest/meta-data/instance
 #echo $instanceType
 
 #touch $myLOGFILE
+echo "Type and executerId,parallel group,date time,connected to and instance type,query id,time,error" >> $myLOGFILE
 
 
 for i in `seq 1 3`; do
