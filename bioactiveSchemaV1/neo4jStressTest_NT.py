@@ -17,9 +17,13 @@ try:
 except IndexError:
    showResult ="N"
 try:
-   nodeCount   =int(sys.argv[6])
+   collectionNodeNumber   =int(sys.argv[6])
 except IndexError:
-   nodeCount = 200000000
+   collectionNodeNumber = 200000000
+try:
+   queryResOrCount   =sys.argv[7]
+except IndexError:
+   queryResOrCount = 'C'
 
 
 ############################################################
@@ -38,7 +42,7 @@ if connectTo == 'localhost':
    outConnectTo = connectTo+'-'+str(instanceType)
    if debug==1: print "DBG-outConnectTo="+str(outConnectTo)
 
-#randEntity = random.randint(1, nodeCount)
+#randEntity = random.randint(1, collectionNodeNumber)
 query={}
 query[0] = "MATCH (organization:organization{id:#})-[x:organization2patent]->(patent)-[r:patent2bioactive]->(bioactive)-[z:bioactive2target]->(target) RETURN count(*) LIMIT 1000"
 query[1] = "MATCH (biomarker1:biomarker{id:#})-[zz:biomarker2biomarker]->(biomarker2:biomarker)-[r:biomarker2biomarkeruse]->(biomarkeruse1:biomarkeruse)-[rr:biomarkeruse2biomarkeruse]->(biomarkeruse2:biomarkeruse) RETURN count(*) LIMIT 1000"
@@ -75,10 +79,11 @@ for myIndex in range(0,int(numParallel)):
    try:
       graph = Graph()
       rndQuery=random.randint(0, len(query)-1)
-      rndQueryVal=random.randint(0, nodeCount)
+      rndQueryVal=random.randint(0, collectionNodeNumber)
       queryToRun = query[rndQuery].replace('#',str(rndQueryVal))
-      rndQueryVal=random.randint(0, nodeCount)
+      rndQueryVal=random.randint(0, collectionNodeNumber)
       queryToRun = queryToRun.replace('%',str(rndQueryVal))
+      if queryResOrCount != 'C': queryToRun = queryToRun.replace('count(*)','*')
 
       if debug==1: print "DBG-executing... " + str(queryToRun)
       results = graph.cypher.execute(queryToRun)

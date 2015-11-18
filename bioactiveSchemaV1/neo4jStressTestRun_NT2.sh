@@ -6,18 +6,20 @@ alias echoi='echo `date +%Y-%m-%d\ %H:%M.%S` -INFO-'
 mkdir log 2>/dev/null
 
 
-if [ $# -ne 4 ]; then
+if [ $# -ne 5 ]; then
    echo "Please pass Test name for logfile (to sync log files when executing from different machines)."
    echo "(single word will do it)"
    echo "also pass neo4j URL"
    echo "also pass your collection node number"
    echo "also pass if you want results in csv (Y / N)"
+   echo "also pass if you want count or results to be printed (C / R)"
    exit 1
 fi
 export testName=$1
 export neoUrl=$2
 export nodeCount=$3
 export printResults=$4
+export countOrRes=$5
 
 #export myLOGFILE="log/neo4jStressTestRunLog_$1.`date +%Y%m%d%H%M`.log"
 export myLOGFILE="log/neo4jStressTestRunLog_$1.csv"
@@ -38,8 +40,8 @@ for i in `seq 1 3`; do
    echoi Running $loopNums loops...
 
    for j in `seq 1 30`; do
-      echoi "   ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType $j $printResults $nodeCount "
-      nohup ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType $j $printResults $nodeCount >> $myLOGFILE 2>&1 &
+      echoi "   ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType $j $printResults $nodeCount $countOrRes "
+      nohup ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType $j $printResults $nodeCount $countOrRes >> $myLOGFILE 2>&1 &
       pids="$pids $!"
 
       let procs=procs+1

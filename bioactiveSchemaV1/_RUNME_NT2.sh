@@ -3,7 +3,7 @@ date
 echo Starting stress test
 echo
 echo
-./neo4jStressTestRun_NT2.sh $1 $2 $3
+./neo4jStressTestRun_NT2.sh $1 $2 $3 $4 $5
 echo
 echo
 echo
