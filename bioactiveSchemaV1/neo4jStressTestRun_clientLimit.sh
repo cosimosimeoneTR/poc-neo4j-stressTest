@@ -6,13 +6,14 @@ alias echoi='echo `date +%Y-%m-%d\ %H:%M.%S` -INFO-'
 mkdir log 2>/dev/null
 
 
-if [ $# -ne 6 ]; then
+if [ $# -ne 7 ]; then
    echo "Please pass Test name for logfile (to sync log files when executing from different machines)."
    echo "also pass neo4j URL"
    echo "also pass your collection node number"
    echo "also pass if you want results in csv (Y / N)"
    echo "also pass if you want count or results to be printed (C / R)"
    echo "also pass parallel client number"
+   echo "also pass query id to execute (99 for random)"
    exit 1
 fi
 export testName=$1
@@ -21,6 +22,7 @@ export nodeCount=$3
 export printResults=$4
 export countOrRes=$5
 export parallelClients=$6
+export query2run=$7
 
 export myLOGFILE="log/$1.csv"
 export arch=`uname -a | cut -d " " -f 1`
@@ -32,13 +34,12 @@ export instanceType=`wget -q -O - http://instance-data/latest/meta-data/instance
 #echo $instanceType
 
 #touch $myLOGFILE
-echo "Test name,Type and executerId,#paralClients,Date time,Connected to and instance type,Query id,Execution Time (seconds),Error,Query,Results" >> $myLOGFILE
+echo "Test name,#paralClients,Date time,Connected to and instance type,queryId,Execution Time (secs),Error,queryConditionId,Results" >> $myLOGFILE
 
 echo -n "Clients running: "
 for j in `seq 1 $parallelClients`; do
-   #echoi "   ./neo4jStressTest_NT.py $neoUrl $parallelClients $instanceType $j $printResults $nodeCount $countOrRes $testName "
    echo -n "#"
-   nohup ./neo4jStressTest_NT.py $neoUrl $parallelClients $instanceType $j $printResults $nodeCount $countOrRes $testName >> $myLOGFILE 2>&1 &
+   nohup ./neo4jStressTest_clientLimit.py $neoUrl $parallelClients $instanceType $printResults $nodeCount $countOrRes $testName $query2run >> $myLOGFILE 2>&1 &
    pids="$pids $!"
 
    let procs=procs+1
