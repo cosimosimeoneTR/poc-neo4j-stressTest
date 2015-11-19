@@ -78,7 +78,6 @@ time.sleep((N-rndWait)+1)
 
 # and run the queries
 for myIndex in range(0,int(numParallel)):
-   startTime = time.time()
 
    try:
       graph = Graph()
@@ -89,10 +88,14 @@ for myIndex in range(0,int(numParallel)):
       queryToRun = queryToRun.replace('%',str(rndQueryVal))
       if queryResOrCount != 'C': queryToRun = queryToRun.replace('count(*)','*')
 
+      startTime = time.time()
+
       if debug==1: print "DBG-executing... " + str(queryToRun)
       results = graph.cypher.execute(queryToRun)
       if debug==1: print "DBG-executed"
+
       endTime = time.time()
+
    except Exception as detail:
       print str(testName)+',NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',9999999999')+','+str(detail)+','+str(queryToRun)
    else:
