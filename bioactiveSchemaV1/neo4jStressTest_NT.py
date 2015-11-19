@@ -88,11 +88,12 @@ for myIndex in range(0,int(numParallel)):
       if debug==1: print "DBG-executing... " + str(queryToRun)
       results = graph.cypher.execute(queryToRun)
       if debug==1: print "DBG-executed"
+      endTime = time.time()
    except Exception as detail:
       print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',9999999999')+','+str(detail)+','+str(queryToRun)
    else:
-      if showResult == "N": print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(time.time() - startTime)+',,"'+str(queryToRun)
-      else: print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(time.time() - startTime)+',,"'+str(queryToRun)+'","'+str(results).replace('"','""')+'"'
+      if showResult == "N": print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(endTime - startTime)+',,"'+str(queryToRun)
+      else: print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(endTime - startTime)+',,"'+str(queryToRun)+'","'+str(results).replace('"','""')+'"'
 
    sys.stdout.flush()
 
