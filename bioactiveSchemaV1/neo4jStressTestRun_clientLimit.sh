@@ -34,8 +34,10 @@ export instanceType=`wget -q -O - http://instance-data/latest/meta-data/instance
 #touch $myLOGFILE
 echo "Test name,Type and executerId,#paralClients,Date time,Connected to and instance type,Query id,Execution Time (seconds),Error,Query,Results" >> $myLOGFILE
 
+echo -n "Clients running: "
 for j in `seq 1 $parallelClients`; do
-   echoi "   ./neo4jStressTest_NT.py $neoUrl $parallelClients $instanceType $j $printResults $nodeCount $countOrRes $testName "
+   #echoi "   ./neo4jStressTest_NT.py $neoUrl $parallelClients $instanceType $j $printResults $nodeCount $countOrRes $testName "
+   echo -n "#"
    nohup ./neo4jStressTest_NT.py $neoUrl $parallelClients $instanceType $j $printResults $nodeCount $countOrRes $testName >> $myLOGFILE 2>&1 &
    pids="$pids $!"
 
@@ -48,10 +50,15 @@ for j in `seq 1 $parallelClients`; do
    fi
 
 done
+echo
 
 echoi waiting for pids
 wait $pids
 echoi pids ended
 pids=""
 
+export best=`grep -v Execution $myLOGFILE  | cut -d"," -f 7 | sort -n |head`
+export worst=`grep -v Execution $myLOGFILE | cut -d"," -f 7 | sort -n -r | head`
+echoi bests=$best
+echoi worst=$worst
 
