@@ -32,7 +32,7 @@ export instanceType=`wget -q -O - http://instance-data/latest/meta-data/instance
 #echo $instanceType
 
 #touch $myLOGFILE
-echo "Type and executerId,parallel group,date time,connected to and instance type,query id,time,error,query,results" >> $myLOGFILE
+echo "Test name,Type and executerId,Parallel group,Date time,Connected to and instance type,Query id,Time,Error,Query,Results" >> $myLOGFILE
 
 
 for i in `seq 1 3`; do
@@ -40,8 +40,8 @@ for i in `seq 1 3`; do
    echoi Running $loopNums loops...
 
    for j in `seq 1 30`; do
-      echoi "   ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType $j $printResults $nodeCount $countOrRes "
-      nohup ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType $j $printResults $nodeCount $countOrRes >> $myLOGFILE 2>&1 &
+      echoi "   ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType $j $printResults $nodeCount $countOrRes $testName "
+      nohup ./neo4jStressTest_NT.py $neoUrl $loopNums $instanceType $j $printResults $nodeCount $countOrRes $testName >> $myLOGFILE 2>&1 &
       pids="$pids $!"
 
       let procs=procs+1

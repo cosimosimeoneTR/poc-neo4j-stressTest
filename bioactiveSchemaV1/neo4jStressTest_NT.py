@@ -24,6 +24,10 @@ try:
    queryResOrCount   =sys.argv[7]
 except IndexError:
    queryResOrCount = 'C'
+try:
+   testName   =sys.argv[8]
+except IndexError:
+   testName = 'C'
 
 
 ############################################################
@@ -90,10 +94,12 @@ for myIndex in range(0,int(numParallel)):
       if debug==1: print "DBG-executed"
       endTime = time.time()
    except Exception as detail:
-      print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',9999999999')+','+str(detail)+','+str(queryToRun)
+      print str(testName)+',NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',9999999999')+','+str(detail)+','+str(queryToRun)
    else:
-      if showResult == "N": print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(endTime - startTime)+',,"'+str(queryToRun)
-      else: print 'NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(endTime - startTime)+',,"'+str(queryToRun)+'","'+str(results).replace('"','""')+'"'
+      if showResult == "N": 
+         print str(testName)+',NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(endTime - startTime)+',,"'+str(queryToRun)
+      else: 
+         print str(testName)+',NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(endTime - startTime)+',,"'+str(queryToRun)+'","'+str(results).replace('"','""')+'"'
 
    sys.stdout.flush()
 
