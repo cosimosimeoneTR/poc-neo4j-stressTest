@@ -16,10 +16,6 @@ export countOrRes=R
 
 date
 echo Starting stress test
-echo
-echo
 ./neo4jStressTestRun_clientLimit.sh $testName  $neoUrl  $nodeCount  $printResults  $countOrRes  $parallelClients
-echo
-echo
 echo
 date
