@@ -32,7 +32,7 @@ export instanceType=`wget -q -O - http://instance-data/latest/meta-data/instance
 #echo $instanceType
 
 #touch $myLOGFILE
-echo "Test name,Type and executerId,Parallel group,Date time,Connected to and instance type,Query id,Time,Error,Query,Results" >> $myLOGFILE
+echo "Test name,Type and executerId,Parallel group,Date time,Connected to and instance type,Query id,Execution Time (seconds),Error,Query,Results" >> $myLOGFILE
 
 
 for i in `seq 1 3`; do
