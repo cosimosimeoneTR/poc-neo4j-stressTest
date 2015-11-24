@@ -65,4 +65,6 @@ echoi bests=$best
 echoi worst=$worst
 echoi avera=$avera
 
+date >> $myLOGFILE.stats
+echo $instanceType >> $myLOGFILE.stats
 echo $best $worst $avera |tr ' ' '\n' >> $myLOGFILE.stats
