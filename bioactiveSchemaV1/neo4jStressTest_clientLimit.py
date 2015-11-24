@@ -7,6 +7,7 @@ from datetime import datetime
 import signal
 
 debug=0
+loopNum=25
 
 connectTo    =sys.argv[1]
 numParallel  =sys.argv[2]
@@ -81,7 +82,8 @@ time.sleep((N-rndWait)+1)
 
 if debug==1: print "query2run="+str(query2run)
 # and run the queries
-for myIndex in range(0,int(numParallel)):
+#for myIndex in range(0,int(numParallel)):
+for myIndex in range(1,25):
 
    try:
       graph = Graph()
