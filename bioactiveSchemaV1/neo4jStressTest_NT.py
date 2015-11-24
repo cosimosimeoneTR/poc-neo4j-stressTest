@@ -97,12 +97,12 @@ for myIndex in range(0,int(numParallel)):
       endTime = time.time()
 
    except Exception as detail:
-      print str(testName)+',NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',9999999999')+','+str(detail)+',id:'+str(rndQueryVal)
+      print str(testName)+',NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',9999999999')+','+str(detail)+','+str(rndQueryVal)
    else:
       if showResult == "N": 
-         print str(testName)+',NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(endTime - startTime)+',,id: "'+str(rndQueryVal)
+         print str(testName)+',NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(endTime - startTime)+',,'+str(rndQueryVal)
       else: 
-         print str(testName)+',NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(endTime - startTime)+',,id:"'+str(rndQueryVal)+'","'+str(results).replace('"','""')+'"'
+         print str(testName)+',NT'+str(parallelGrp)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+','+str(endTime - startTime)+',,'+str(rndQueryVal)+',"'+str(results).replace('"','""')+'"'
 
    sys.stdout.flush()
 
