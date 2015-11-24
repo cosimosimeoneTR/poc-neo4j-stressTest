@@ -6,7 +6,7 @@ import time,random,sys,string
 from datetime import datetime
 import signal
 
-debug=1
+debug=0
 
 connectTo    =sys.argv[1]
 numParallel  =sys.argv[2]
