@@ -58,9 +58,9 @@ wait $pids
 echoi pids ended
 pids=""
 
-export best=`grep -v Execution $myLOGFILE  | cut -d"," -f 7 | sort -n |head`
-export worst=`grep -v Execution $myLOGFILE | cut -d"," -f 7 | sort -n -r | head`
-export avera=`grep -v Execution $myLOGFILE | awk 'BEGIN { FS = "," } ;{ total += $2; count++ } END { print total/count }'`
+export best=`grep -v Execution $myLOGFILE  | cut -d"," -f 6 | sort -n |head`
+export worst=`grep -v Execution $myLOGFILE | cut -d"," -f 6 | sort -n -r | head`
+export avera=`grep -v Execution $myLOGFILE | awk 'BEGIN { FS = "," } ;{ total += $6; count++ } END { print total/count }'`
 echoi bests=$best
 echoi worst=$worst
 echoi avera=$avera
