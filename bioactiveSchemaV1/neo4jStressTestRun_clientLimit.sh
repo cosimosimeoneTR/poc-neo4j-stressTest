@@ -75,6 +75,6 @@ echo $worst |tr ' ' '\n' >> $myLOGFILE.stats
 echo "-- Avg"      >> $myLOGFILE.stats
 echo $avera |tr ' ' '\n' >> $myLOGFILE.stats
 echo "-- Firsts"   >> $myLOGFILE.stats
-head -11 $myLOGFILE | tail >> $myLOGFILE.stats
+head -11 $myLOGFILE | tail | cut -d"," -f 6  >> $myLOGFILE.stats
 echo "-- Lasts"    >> $myLOGFILE.stats
-tail $myLOGFILE  >> $myLOGFILE.stats
+tail $myLOGFILE | cut -d"," -f 6     >> $myLOGFILE.stats
