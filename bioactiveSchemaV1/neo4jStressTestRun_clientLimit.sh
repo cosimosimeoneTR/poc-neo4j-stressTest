@@ -65,4 +65,4 @@ echoi bests=$best
 echoi worst=$worst
 echoi avera=$avera
 
-echo $best $worst $avera >> $myLOGFILE.stats
+echo $best $worst $avera |tr ' ' '\n' >> $myLOGFILE.stats
