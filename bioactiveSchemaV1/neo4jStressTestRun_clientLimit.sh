@@ -67,4 +67,13 @@ echoi avera=$avera
 
 date >> $myLOGFILE.stats
 echo $instanceType >> $myLOGFILE.stats
-echo $best $worst $avera |tr ' ' '\n' >> $myLOGFILE.stats
+echo "-- Bests"    >> $myLOGFILE.stats
+echo $best |tr ' ' '\n' >> $myLOGFILE.stats
+echo "-- Worsts"   >> $myLOGFILE.stats
+echo $worst |tr ' ' '\n' >> $myLOGFILE.stats
+echo "-- Avg"      >> $myLOGFILE.stats
+echo $avera |tr ' ' '\n' >> $myLOGFILE.stats
+echo "-- Firsts"
+`head -11 $myLOGFILE | tail >> $myLOGFILE.stats
+echo "-- Lasts"
+`tail $myLOGFILE  >> $myLOGFILE.stats
