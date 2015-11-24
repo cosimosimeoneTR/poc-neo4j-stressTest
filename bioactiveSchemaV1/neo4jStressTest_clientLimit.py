@@ -36,7 +36,7 @@ except IndexError:
 ############################################################
 def sigterm_handler(_signo, _stack_frame):
     # Raises SystemExit(0):
-    print ',,,'+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',99998888')+',KILLED'
+    print ',,'+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndQuery)+str(',99998888')+',KILLED'
     sys.exit(0)
 signal.signal(signal.SIGTERM, sigterm_handler)
 ############################################################
