@@ -51,6 +51,7 @@ for j in `seq 1 $parallelClients`; do
    fi
 
 done
+echo -n " ($parallelClients)"
 echo
 
 echoi waiting for pids
@@ -66,7 +67,7 @@ echoi worst=$worst
 echoi avera=$avera
 
 date >> $myLOGFILE.stats
-echo $instanceType >> $myLOGFILE.stats
+echo $instanceType - $parallelClients parallel clients >> $myLOGFILE.stats
 echo "-- Bests"    >> $myLOGFILE.stats
 echo $best |tr ' ' '\n' >> $myLOGFILE.stats
 echo "-- Worsts"   >> $myLOGFILE.stats
