@@ -62,6 +62,7 @@ query[6] = "MATCH (a:bioactive{id:#})-[r:bioactive2bioactive*1..9]->() RETURN co
 query[7] = "MATCH (a:protein{id:#})-[b:protein2gene]->(c:gene)-[d:gene2genevariant]->(e:genevariant)-[f:genevariant2conditiondesease]->(g:conditiondesease) RETURN count(*) LIMIT 10000"
 query[8] = "MATCH (a:gene{id:#})-[b:gene2protein*1..9]->(c:protein)-[d:protein2gene]-(e:gene) RETURN count(*) LIMIT 100"
 query[9] = "MATCH (a:biomarker{id:#})-[b:biomarker2biomarkeruse*1..9]->(c:biomarkeruse)-[d:biomarkeruse2biomarkeruse]-(e:biomarkeruse) RETURN count(*) LIMIT 10000"
+query[10] = "MATCH (protein:protein{id:#})-[protein2gene]->(gene)-[gene2genevariant]->(genevariant) return count(*) limit 1000"
 
 # Not congestion it on connections...
 # So, pone N seconds delay: wait x seconds, connect, wait N-x seconds, and run the query ;-)
