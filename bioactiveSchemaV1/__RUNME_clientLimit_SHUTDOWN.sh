@@ -8,10 +8,10 @@ sleep 600
 ./_RUNME_clientLimit.sh query10_30cli_take3 30 10;sleep 60;./_RUNME_clientLimit.sh query10_30cli_take4 30 10;sleep 60
 ./_RUNME_clientLimit.sh query10_50cli_take3 50 10;sleep 60;./_RUNME_clientLimit.sh query10_50cli_take4 50 10;sleep 60
 sleep 600
-./_RUNME_clientLimit.sh query10_01cli_take5  1 10;sleep 60;./_RUNME_clientLimit.sh query10_01cli_take5  1 10;sleep 60
-./_RUNME_clientLimit.sh query10_10cli_take5 10 10;sleep 60;./_RUNME_clientLimit.sh query10_10cli_take5 10 10;sleep 60
-./_RUNME_clientLimit.sh query10_30cli_take5 30 10;sleep 60;./_RUNME_clientLimit.sh query10_30cli_take5 30 10;sleep 60
-./_RUNME_clientLimit.sh query10_50cli_take5 50 10;sleep 60;./_RUNME_clientLimit.sh query10_50cli_take5 50 10;sleep 60
+./_RUNME_clientLimit.sh query10_01cli_take5  1 10;sleep 60;./_RUNME_clientLimit.sh query10_01cli_take6  1 10;sleep 60
+./_RUNME_clientLimit.sh query10_10cli_take5 10 10;sleep 60;./_RUNME_clientLimit.sh query10_10cli_take6 10 10;sleep 60
+./_RUNME_clientLimit.sh query10_30cli_take5 30 10;sleep 60;./_RUNME_clientLimit.sh query10_30cli_take6 30 10;sleep 60
+./_RUNME_clientLimit.sh query10_50cli_take5 50 10;sleep 60;./_RUNME_clientLimit.sh query10_50cli_take6 50 10;sleep 60
 
 
 sudo shutdown -h now
