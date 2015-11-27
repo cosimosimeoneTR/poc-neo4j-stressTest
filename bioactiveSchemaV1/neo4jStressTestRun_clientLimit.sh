@@ -67,7 +67,7 @@ echoi worst=$worst
 echoi avera=$avera
 
 date >> $myLOGFILE.stats
-echo $instanceType - $parallelClients parallel clients >> $myLOGFILE.stats
+echo $testName - $instanceType - $parallelClients parallel clients >> $myLOGFILE.stats
 echo "-- Bests"    >> $myLOGFILE.stats
 echo $best |tr ' ' '\n' >> $myLOGFILE.stats
 echo "-- Worsts"   >> $myLOGFILE.stats
