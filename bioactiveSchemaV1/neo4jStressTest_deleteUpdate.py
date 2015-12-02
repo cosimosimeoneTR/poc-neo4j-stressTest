@@ -6,8 +6,8 @@ import time,random,sys,string
 from datetime import datetime
 import signal
 
-debug=1
-loopNum=2
+debug=0
+loopNum=25
 
 connectTo    =sys.argv[1]
 numParallel  =sys.argv[2]
@@ -93,16 +93,17 @@ for myIndex in range(1,25):
          queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#}) detach delete x"
       elif deleteOrUpdate == 'DR':
          rndNodeVal=random.randint(0, collectionNodeNumber)
-         queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#})-[r]->() return x.id,type(r) limit 1"
-         queryToRun = queryToRun.replace('#',str(rndNodeVal))
+         queryToRun = "match (a:"  +str(rndNode)+  " )-[r]->(b) return labels(a),a.id,type(r),id(r) limit 1"
 
 	 results = graph.cypher.execute(queryToRun)
 
-	 rndNodeVal=results.one[0]
-	 relToBeDeleted=results.one[1]
-	 queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#})-[r:"  +str(relToBeDeleted)+  "]->() delete r"
-
+	 rndNodeVal=results.one[1]
+	 relToBeDeleted=results.one[2]
+	 relIdToBeDeleted=results.one[3]
+	 queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:"   +str(rndNodeVal)+   "})-[r:"  +str(relToBeDeleted)+  "]->() where id(r)="  +str(relIdToBeDeleted)+   " delete r"
+	 #print queryToRun
 	 exit
+	 
       else:
          queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#}) set x.updated="   +str(datetime.utcnow().strftime('%Y%m%d-%H%M'))
 
@@ -117,9 +118,9 @@ for myIndex in range(1,25):
       endTime = time.time()
 
    except Exception as detail:
-      print str(testName)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndNode)+str(',9999')+','+str(detail)+','+str(rndNodeVal)
+      print str(testName)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndNode)+str(',9999')+','+str(detail)+','+str(relIdToBeDeleted)
    else:
-      print str(testName)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndNode)+','+str(endTime - startTime)+',,'+str(rndNodeVal)
+      print str(testName)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndNode)+','+str(endTime - startTime)+',,'+str(relIdToBeDeleted)
 
    sys.stdout.flush()
 
