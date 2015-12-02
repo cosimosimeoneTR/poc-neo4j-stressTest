@@ -30,7 +30,7 @@ except IndexError:
 ############################################################
 def sigterm_handler(_signo, _stack_frame):
     # Raises SystemExit(0):
-    print ',,'+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndNode)+str(',99998888')+',KILLED'
+    print ',,'+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndNode)+str(',99999998888')+',KILLED'
     sys.exit(0)
 signal.signal(signal.SIGTERM, sigterm_handler)
 ############################################################
@@ -118,9 +118,9 @@ for myIndex in range(1,25):
       endTime = time.time()
 
    except Exception as detail:
-      print str(testName)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndNode)+str(',9999')+','+str(detail)+','+str(rndNodeVal)
+      print str(testName)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndNode)+str(',9999999')+','+str(detail)+','+str(deleteOrUpdate)+str(rndNodeVal)
    else:
-      print str(testName)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndNode)+','+str(endTime - startTime)+',,'+str(rndNodeVal)
+      print str(testName)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndNode)+','+str(endTime - startTime)+',,'+str(deleteOrUpdate)+str(rndNodeVal)
 
    sys.stdout.flush()
 
