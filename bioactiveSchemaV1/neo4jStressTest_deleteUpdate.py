@@ -81,10 +81,10 @@ time.sleep((N-rndWait)+1)
 
 # and run the queries
 
+graph = Graph()
 for myIndex in range(1,25):
 
    try:
-      graph = Graph()
 
       rndNode=node[random.randint(0, len(node)-1)]
       rndNodeVal=random.randint(0, collectionNodeNumber)
