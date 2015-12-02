@@ -23,7 +23,7 @@ except IndexError:
 try:
    deleteOrUpdate   =sys.argv[6]
 except IndexError:
-   deleteOrUpdate = 'D'
+   deleteOrUpdate = 'U'
 
 
 
