@@ -118,9 +118,9 @@ for myIndex in range(1,25):
       endTime = time.time()
 
    except Exception as detail:
-      print str(testName)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndNode)+str(',9999')+','+str(detail)+','+str(relIdToBeDeleted)
+      print str(testName)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndNode)+str(',9999')+','+str(detail)+','+str(rndNodeVal)
    else:
-      print str(testName)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndNode)+','+str(endTime - startTime)+',,'+str(relIdToBeDeleted)
+      print str(testName)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndNode)+','+str(endTime - startTime)+',,'+str(rndNodeVal)
 
    sys.stdout.flush()
 
