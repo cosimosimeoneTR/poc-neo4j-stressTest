@@ -6,17 +6,19 @@ alias echoi='echo `date +%Y-%m-%d\ %H:%M.%S` -INFO-'
 mkdir log 2>/dev/null
 
 
-if [ $# -ne 4 ]; then
+if [ $# -ne 5 ]; then
    echo "Please pass Test name for logfile (to sync log files when executing from different machines)."
    echo "also pass neo4j URL"
    echo "also pass your collection node number"
    echo "also pass parallel client number"
+   echo "also pass U for updagte test, D for delete node test, DR for delete relations test"
    exit 1
 fi
 export testName=$1
 export neoUrl=$2
 export nodeCount=$3
 export parallelClients=$4
+export updateOrDelete=$5
 
 export myLOGFILE="log/$1.csv"
 export arch=`uname -a | cut -d " " -f 1`
@@ -33,7 +35,7 @@ echo "Test name,#paralClients,Date time,Connected to and instance type,queryId,E
 echo -n "Clients running: "
 for j in `seq 1 $parallelClients`; do
    echo -n "#"
-   nohup ./neo4jStressTest_deleteUpdate.py $neoUrl $parallelClients $instanceType $testName $nodeCount >> $myLOGFILE 2>&1 &
+   nohup ./neo4jStressTest_deleteUpdate.py $neoUrl $parallelClients $instanceType $testName $nodeCount $updateOrDelete >> $myLOGFILE 2>&1 &
    pids="$pids $!"
 
    let procs=procs+1

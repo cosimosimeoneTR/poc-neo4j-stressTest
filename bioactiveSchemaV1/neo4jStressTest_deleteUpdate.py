@@ -6,8 +6,8 @@ import time,random,sys,string
 from datetime import datetime
 import signal
 
-debug=0
-loopNum=25
+debug=1
+loopNum=2
 
 connectTo    =sys.argv[1]
 numParallel  =sys.argv[2]
@@ -20,6 +20,10 @@ try:
    collectionNodeNumber   =int(sys.argv[5])
 except IndexError:
    collectionNodeNumber = 200000000
+try:
+   deleteOrUpdate   =sys.argv[6]
+except IndexError:
+   deleteOrUpdate = 'D'
 
 
 
@@ -83,10 +87,25 @@ for myIndex in range(1,25):
       graph = Graph()
 
       rndNode=node[random.randint(0, len(node)-1)]
-
-      queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#}) detach delete x"
-
       rndNodeVal=random.randint(0, collectionNodeNumber)
+
+      if deleteOrUpdate == 'D':
+         queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#}) detach delete x"
+      elif deleteOrUpdate == 'DR':
+         rndNodeVal=random.randint(0, collectionNodeNumber)
+         queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#})-[r]->() return x.id,type(r) limit 1"
+         queryToRun = queryToRun.replace('#',str(rndNodeVal))
+
+	 results = graph.cypher.execute(queryToRun)
+
+	 rndNodeVal=results.one[0]
+	 relToBeDeleted=results.one[1]
+	 queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#})-[r:"  +str(relToBeDeleted)+  "]->() delete r"
+
+	 exit
+      else:
+         queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#}) set x.updated="   +str(datetime.utcnow().strftime('%Y%m%d-%H%M'))
+
       queryToRun = queryToRun.replace('#',str(rndNodeVal))
 
       startTime = time.time()
