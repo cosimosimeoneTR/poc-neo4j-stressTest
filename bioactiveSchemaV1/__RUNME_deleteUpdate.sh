@@ -11,7 +11,7 @@ sleep 60
 ./_RUNME_deleteUpdate.sh query10_01cli_take5  1 ;sleep 6;./_RUNME_deleteUpdate.sh query10_01cli_take6  1 ;sleep 6
 ./_RUNME_deleteUpdate.sh query10_10cli_take5 10 ;sleep 6;./_RUNME_deleteUpdate.sh query10_10cli_take6 10 ;sleep 6
 ./_RUNME_deleteUpdate.sh query10_30cli_take5 30 ;sleep 6;./_RUNME_deleteUpdate.sh query10_30cli_take6 30 ;sleep 6
-./_RUNME_deleteUpdate.sh query10_50cli_take5 50 ;sleep 6;./_RUNME_deleteUpdate.sh query10_50cli_take6 50 ;sleep 6
+./_RUNME_deleteUpdate.sh query10_50cli_take5 50 ;sleep 6;./_RUNME_deleteUpdate.sh query10_50cli_take6 50 ;#sleep 6
 
 
 ### sudo shutdown -h now
