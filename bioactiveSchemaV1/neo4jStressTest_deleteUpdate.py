@@ -93,14 +93,15 @@ for myIndex in range(1,25):
          queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#}) detach delete x"
       elif deleteOrUpdate == 'DR':
          rndNodeVal=random.randint(0, collectionNodeNumber)
-         queryToRun = "match (a:"  +str(rndNode)+  " )-[r]->(b) return labels(a),a.id,type(r),id(r) limit 1"
+         queryToRun = "match (a:"  +str(rndNode)+  " )-[r]->(b) return a.id,type(r),id(r) limit 1"
 
 	 results = graph.cypher.execute(queryToRun)
 
-	 rndNodeVal=results.one[1]
-	 relToBeDeleted=results.one[2]
-	 relIdToBeDeleted=results.one[3]
-	 queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:"   +str(rndNodeVal)+   "})-[r:"  +str(relToBeDeleted)+  "]->() where id(r)="  +str(relIdToBeDeleted)+   " delete r"
+	 rndNodeVal=results.one[0]
+	 relToBeDeleted=results.one[1]
+	 relIdToBeDeleted=results.one[2]
+	 #queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:"   +str(rndNodeVal)+   "})-[r:"  +str(relToBeDeleted)+  "]->() where id(r)="  +str(relIdToBeDeleted)+   " delete r"
+	 queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:"   +str(rndNodeVal)+   "})-[r:"  +str(relToBeDeleted)+  "]->() delete r"
 	 #print queryToRun
 	 exit
 	 
