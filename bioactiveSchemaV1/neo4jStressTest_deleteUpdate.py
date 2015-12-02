@@ -81,10 +81,10 @@ time.sleep((N-rndWait)+1)
 
 # and run the queries
 
-graph = Graph()
 for myIndex in range(1,25):
 
    try:
+      graph = Graph()
 
       rndNode=node[random.randint(0, len(node)-1)]
       rndNodeVal=random.randint(0, collectionNodeNumber)
@@ -93,7 +93,7 @@ for myIndex in range(1,25):
          queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#}) detach delete x"
       elif deleteOrUpdate == 'DR':
          rndNodeVal=random.randint(0, collectionNodeNumber)
-         queryToRun = "match (a:"  +str(rndNode)+  " )-[r]->(b) return a.id,type(r),id(r) limit 1"
+         queryToRun = "match (a:"  +str(rndNode)+  "{id:"   +str(rndNodeVal)+  "})-[r]->(b) return a.id,type(r),id(r) limit 1"
 
 	 results = graph.cypher.execute(queryToRun)
 
