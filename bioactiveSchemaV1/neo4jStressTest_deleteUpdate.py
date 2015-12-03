@@ -112,7 +112,7 @@ for myIndex in range(1,25):
          #exit
 
       else:
-         queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#}) set x.updated="   +str(datetime.utcnow().strftime('%Y%m%d-%H%M'))
+         queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#}) set x.updated='"   +str(datetime.utcnow().strftime('%Y%m%d-%H%M'))+   "'"
 
       queryToRun = queryToRun.replace('#',str(rndNodeVal))
 
