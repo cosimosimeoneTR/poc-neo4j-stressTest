@@ -49,7 +49,7 @@ node[0] = "bioactive"
 node[1] = "biomarker"
 node[2] = "biomarkeruse"
 node[3] = "clinicalstudies"
-node[4] = "conditiondesease"
+node[4] = "biomarkeruse"   # IT'S A TRAP!!! :D
 node[5] = "drugdruginteraction"
 node[6] = "experimentalmodel"
 node[7] = "experimentalpharmacology"
@@ -60,7 +60,7 @@ node[11] = "patent"
 node[12] = "pharmacokinetics"
 node[13] = "protein"
 node[14] = "target"
-node[15] = "toxicity"
+#node[15] = "toxicity"
 
 # Not congestion it on connections...
 # So, pone N seconds delay: wait x seconds, connect, wait N-x seconds, and run the node ;-)
@@ -92,19 +92,25 @@ for myIndex in range(1,25):
       if deleteOrUpdate == 'D':
          queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#}) detach delete x"
       elif deleteOrUpdate == 'DR':
+
          rndNodeVal=random.randint(0, collectionNodeNumber)
          queryToRun = "match (a:"  +str(rndNode)+  "{id:"   +str(rndNodeVal)+  "})-[r]->(b) return a.id,type(r),id(r) limit 1"
 
-	 results = graph.cypher.execute(queryToRun)
+         if debug==1: print "Running investigation query "+str(queryToRun)
+         results = graph.cypher.execute(queryToRun)
+         if debug==1: print "Running investigation query DONE"
 
-	 rndNodeVal=results.one[0]
-	 relToBeDeleted=results.one[1]
-	 relIdToBeDeleted=results.one[2]
-	 #queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:"   +str(rndNodeVal)+   "})-[r:"  +str(relToBeDeleted)+  "]->() where id(r)="  +str(relIdToBeDeleted)+   " delete r"
-	 queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:"   +str(rndNodeVal)+   "})-[r:"  +str(relToBeDeleted)+  "]->() delete r"
-	 #print queryToRun
-	 exit
-	 
+         rndNodeVal=results.one[0]
+         relToBeDeleted=results.one[1]
+         relIdToBeDeleted=results.one[2]
+         if debug==1: print "Running investigation query results: rndNodeVal="+str(rndNodeVal)+" relToBeDeleted="+str(relToBeDeleted)+" relIdToBeDeleted="+str(relIdToBeDeleted)
+
+         queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:"   +str(rndNodeVal)+   "})-[r:"  +str(relToBeDeleted)+  "]->() where id(r)="  +str(relIdToBeDeleted)+   " delete r"
+         #queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:"   +str(rndNodeVal)+   "})-[r:"  +str(relToBeDeleted)+  "]->() delete r"
+
+         if debug==1: print "queryToRun="+str(queryToRun)
+         #exit
+
       else:
          queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#}) set x.updated="   +str(datetime.utcnow().strftime('%Y%m%d-%H%M'))
 
