@@ -100,9 +100,13 @@ for myIndex in range(1,25):
          results = graph.cypher.execute(queryToRun)
          if debug==1: print "Running investigation query DONE"
 
-         rndNodeVal=results.one[0]
-         relToBeDeleted=results.one[1]
-         relIdToBeDeleted=results.one[2]
+	 try:
+            rndNodeVal=results.one[0]
+            relToBeDeleted=results.one[1]
+            relIdToBeDeleted=results.one[2]
+	 except Exception as detail:
+	    exit
+
          if debug==1: print "Running investigation query results: rndNodeVal="+str(rndNodeVal)+" relToBeDeleted="+str(relToBeDeleted)+" relIdToBeDeleted="+str(relIdToBeDeleted)
 
          queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:"   +str(rndNodeVal)+   "})-[r:"  +str(relToBeDeleted)+  "]->() where id(r)="  +str(relIdToBeDeleted)+   " delete r"
