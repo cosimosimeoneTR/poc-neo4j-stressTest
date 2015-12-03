@@ -57,10 +57,11 @@ pids=""
 
 export best=`grep -v Execution $myLOGFILE  | cut -d"," -f 6 | sort -n |head`
 export worst=`grep -v Execution $myLOGFILE | cut -d"," -f 6 | sort -n -r | head`
-export avera=`grep -v Execution $myLOGFILE | awk 'BEGIN { FS = "," } ;{ total += $6; count++ } END { print total/count }'`
+export averaOut=`grep -v Execution $myLOGFILE | awk 'BEGIN { FS = "," } ;{ total += $6; count++ } END { total/count }'`
+export avera=`grep -v Execution $myLOGFILE | awk 'BEGIN { FS = "," } ;{ total += $6; count++ } END { print ENVIRON["testName"] "," ENVIRON["parallelClients"] "," ENVIRON["instanceType"] "," total/count }'`
 echoi bests=$best
 echoi worst=$worst
-echoi avera=$avera
+echoi avera=$averaOut
 
 date >> $myLOGFILE.stats
 echo $testName - $instanceType - $parallelClients parallel clients >> $myLOGFILE.stats
@@ -69,6 +70,7 @@ echo $best |tr ' ' '\n' >> $myLOGFILE.stats
 echo "-- Worsts"   >> $myLOGFILE.stats
 echo $worst |tr ' ' '\n' >> $myLOGFILE.stats
 echo "-- Avg"      >> $myLOGFILE.stats
+echo $averaOut |tr ' ' '\n' >> $myLOGFILE.stats
 echo $avera |tr ' ' '\n' >> $myLOGFILE.stats
 echo "-- Firsts"   >> $myLOGFILE.stats
 head -11 $myLOGFILE | tail | cut -d"," -f 6  >> $myLOGFILE.stats
