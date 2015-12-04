@@ -84,7 +84,7 @@ time.sleep((N-rndWait)+1)
 if debug==1: print "query2run="+str(query2run)
 # and run the queries
 #for myIndex in range(0,int(numParallel)):
-for myIndex in range(1,25):
+for myIndex in range(1,loopNum):
 
    try:
       graph = Graph()
