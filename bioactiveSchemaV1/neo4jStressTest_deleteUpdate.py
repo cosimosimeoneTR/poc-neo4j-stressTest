@@ -115,7 +115,7 @@ for myIndex in range(1,loopNum):
       queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#}) detach delete x"
 
    elif deleteOrUpdate == 'U':
-      queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#}) set x.updated='"   +str(datetime.utcnow().strftime('%Y%m%d-%H%M'))+   "'"
+      queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#}) set x.attr"+  str(random.randint(0, 4))   +"='"   +str(datetime.utcnow().strftime('%Y%m%d-%H%M'))+   "', x.updated='"   +str(datetime.utcnow().strftime('%Y%m%d-%H%M'))+   "'"
 
    elif deleteOrUpdate == 'DR':
       queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:"   +str(rndNodeVal)+   "})-[r:"  +str(relToBeDeleted)+  "]->() where id(r)="  +str(relIdToBeDeleted)+   " delete r"
