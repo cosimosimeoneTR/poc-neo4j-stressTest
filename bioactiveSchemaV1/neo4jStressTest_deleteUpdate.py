@@ -81,42 +81,56 @@ time.sleep((N-rndWait)+1)
 
 # and run the queries
 
-for myIndex in range(1,25):
+for myIndex in range(1,loopNum):
 
-   try:
-      graph = Graph()
+   rndNodeVal=-1
+   rndNode=-1
+   rndNodeVal=-1
 
-      rndNode=node[random.randint(0, len(node)-1)]
-      rndNodeVal=random.randint(0, collectionNodeNumber)
 
-      if deleteOrUpdate == 'D':
-         queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#}) detach delete x"
-      elif deleteOrUpdate == 'DR':
+   while rndNodeVal < 0:
+      try:
+         graph = Graph()
 
+         # Get something to work on...
+         rndNode=node[random.randint(0, len(node)-1)]
          rndNodeVal=random.randint(0, collectionNodeNumber)
+
          queryToRun = "match (a:"  +str(rndNode)+  "{id:"   +str(rndNodeVal)+  "})-[r]->(b) return a.id,type(r),id(r) limit 1"
 
          if debug==1: print "Running investigation query "+str(queryToRun)
          results = graph.cypher.execute(queryToRun)
          if debug==1: print "Running investigation query DONE"
 
-	 try:
-            rndNodeVal=results.one[0]
-            relToBeDeleted=results.one[1]
-            relIdToBeDeleted=results.one[2]
-	 except Exception as detail:
-	    exit
+         rndNodeVal=results.one[0]
+         relToBeDeleted=results.one[1]
+         relIdToBeDeleted=results.one[2]
 
-         if debug==1: print "Running investigation query results: rndNodeVal="+str(rndNodeVal)+" relToBeDeleted="+str(relToBeDeleted)+" relIdToBeDeleted="+str(relIdToBeDeleted)
+      except Exception as detail:
+         rndNodeVal=-1
 
-         queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:"   +str(rndNodeVal)+   "})-[r:"  +str(relToBeDeleted)+  "]->() where id(r)="  +str(relIdToBeDeleted)+   " delete r"
-         #queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:"   +str(rndNodeVal)+   "})-[r:"  +str(relToBeDeleted)+  "]->() delete r"
 
-         if debug==1: print "queryToRun="+str(queryToRun)
-         #exit
+   #... and work on it
+   if deleteOrUpdate == 'D':
+      queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#}) detach delete x"
 
-      else:
-         queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#}) set x.updated='"   +str(datetime.utcnow().strftime('%Y%m%d-%H%M'))+   "'"
+   elif deleteOrUpdate == 'U':
+      queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#}) set x.updated='"   +str(datetime.utcnow().strftime('%Y%m%d-%H%M'))+   "'"
+
+   elif deleteOrUpdate == 'DR':
+
+      if debug==1: print "Running investigation query results: rndNodeVal="+str(rndNodeVal)+" relToBeDeleted="+str(relToBeDeleted)+" relIdToBeDeleted="+str(relIdToBeDeleted)
+
+      ###queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:"   +str(rndNodeVal)+   "})-[r:"  +str(relToBeDeleted)+  "]->() delete r"
+      queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:"   +str(rndNodeVal)+   "})-[r:"  +str(relToBeDeleted)+  "]->() where id(r)="  +str(relIdToBeDeleted)+   " delete r"
+
+      if debug==1: print "queryToRun="+str(queryToRun)
+      #exit
+
+
+   # Make it happen!
+   try:
+      graph = Graph()
 
       queryToRun = queryToRun.replace('#',str(rndNodeVal))
 
@@ -129,7 +143,7 @@ for myIndex in range(1,25):
       endTime = time.time()
 
    except Exception as detail:
-      print str(testName)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndNode)+str(',9999999')+','+str(detail)+','+str(deleteOrUpdate)+str(rndNodeVal)
+      print str(testName)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndNode)+str(',9999999999')+','+str(detail)+','+str(deleteOrUpdate)+str(rndNodeVal)
    else:
       print str(testName)+','+str(numParallel)+','+datetime.utcnow().strftime('%Y%m%d-%H%M')+','+str(outConnectTo)+','+str(rndNode)+','+str(endTime - startTime)+',,'+str(deleteOrUpdate)+str(rndNodeVal)
 
