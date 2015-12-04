@@ -118,14 +118,7 @@ for myIndex in range(1,loopNum):
       queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:#}) set x.updated='"   +str(datetime.utcnow().strftime('%Y%m%d-%H%M'))+   "'"
 
    elif deleteOrUpdate == 'DR':
-
-      if debug==1: print "Running investigation query results: rndNodeVal="+str(rndNodeVal)+" relToBeDeleted="+str(relToBeDeleted)+" relIdToBeDeleted="+str(relIdToBeDeleted)
-
-      ###queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:"   +str(rndNodeVal)+   "})-[r:"  +str(relToBeDeleted)+  "]->() delete r"
       queryToRun = "MATCH (x:"  +str(rndNode)+  " {id:"   +str(rndNodeVal)+   "})-[r:"  +str(relToBeDeleted)+  "]->() where id(r)="  +str(relIdToBeDeleted)+   " delete r"
-
-      if debug==1: print "queryToRun="+str(queryToRun)
-      #exit
 
 
    # Make it happen!
