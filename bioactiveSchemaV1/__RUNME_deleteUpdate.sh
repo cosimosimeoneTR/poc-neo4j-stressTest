@@ -1,3 +1,6 @@
+export instanceType=`wget -q -O - http://instance-data/latest/meta-data/instance-type || echo REMOTE`
+export myDate=`date +%Y%m%d_%H%M%S`
+
 ./_RUNME_deleteUpdate.sh updateNodeAddAttr_01cli_take1  1 U  ;sleep 6;./_RUNME_deleteUpdate.sh updateNodeAddAttr_01cli_take2  1 U  ;sleep 6
 ./_RUNME_deleteUpdate.sh updateNodeAddAttr_10cli_take1 10 U  ;sleep 6;./_RUNME_deleteUpdate.sh updateNodeAddAttr_10cli_take2 10 U  ;sleep 6
 ./_RUNME_deleteUpdate.sh updateNodeAddAttr_30cli_take1 30 U  ;sleep 6;./_RUNME_deleteUpdate.sh updateNodeAddAttr_30cli_take2 30 U  ;sleep 6
@@ -12,7 +15,6 @@ sleep 60
 ./_RUNME_deleteUpdate.sh updateNodeAddAttr_10cli_take5 10 U  ;sleep 6;./_RUNME_deleteUpdate.sh updateNodeAddAttr_10cli_take6 10 U  ;sleep 6
 ./_RUNME_deleteUpdate.sh updateNodeAddAttr_30cli_take5 30 U  ;sleep 6;./_RUNME_deleteUpdate.sh updateNodeAddAttr_30cli_take6 30 U  ;sleep 6
 ./_RUNME_deleteUpdate.sh updateNodeAddAttr_50cli_take5 50 U  ;sleep 6;./_RUNME_deleteUpdate.sh updateNodeAddAttr_50cli_take6 50 U  ;#sleep 6
-
 
 sleep 60
 
@@ -31,7 +33,6 @@ sleep 60
 ./_RUNME_deleteUpdate.sh deleteRels_30cli_take5 30 DR ;sleep 6;./_RUNME_deleteUpdate.sh deleteRels_30cli_take6 30 DR ;sleep 6
 ./_RUNME_deleteUpdate.sh deleteRels_50cli_take5 50 DR ;sleep 6;./_RUNME_deleteUpdate.sh deleteRels_50cli_take6 50 DR ;#sleep 6
 
-
 sleep 60
 
 
@@ -48,6 +49,10 @@ sleep 60
 ./_RUNME_deleteUpdate.sh deleteNodeCascade_01cli_take5  1 D  ;sleep 6;./_RUNME_deleteUpdate.sh deleteNodeCascade_01cli_take6  1 D  ;sleep 6
 ./_RUNME_deleteUpdate.sh deleteNodeCascade_10cli_take5 10 D  ;sleep 6;./_RUNME_deleteUpdate.sh deleteNodeCascade_10cli_take6 10 D  ;sleep 6
 ./_RUNME_deleteUpdate.sh deleteNodeCascade_30cli_take5 30 D  ;sleep 6;./_RUNME_deleteUpdate.sh deleteNodeCascade_30cli_take6 30 D  ;sleep 6
-./_RUNME_deleteUpdate.sh deleteNodeCascade_50cli_take5 50 D  ;sleep 6;./_RUNME_deleteUpdate.sh deleteNodeCascade_50cli_take6 50 D  ;sleep 6
+./_RUNME_deleteUpdate.sh deleteNodeCascade_50cli_take5 50 D  ;sleep 6;./_RUNME_deleteUpdate.sh deleteNodeCascade_50cli_take6 50 D  ;#sleep 6
+
+grep AVERAGE log/*.stats > log/$myDate\_$instanceType.finalStats
+
+
 
 ### sudo shutdown -h now
